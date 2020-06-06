@@ -21,8 +21,7 @@ app.get("/", (req, res, next) => {
 
 app.get("/api/datosTotal", (req, res, next) => {
   let sql = "select h.id AS id, h.ENG AS Humedad, n.ENG AS Nivel, t.ENG AS Temperatura, iA.ENG AS IndiceAmbiental FROM Humedad h JOIN Nivel n JOIN Temperatura t JOIN IndiceAmbiental iA WHERE h.id=n.id and t.id=h.id and t.id=n.id AND t.id=iA.id"
-  let params = [];
-
+  
   db.all(sql, (err, rows) => {
     if (err) {
       res.status(400).json({ "error": err.message });
@@ -81,8 +80,7 @@ app.get("/api/arrTemp", (req, res, next) => {
         
         rows.forEach(element => {           
            var t=element.Temperatura
-           sports.push(t);
-          
+           sports.push(t);          
         });
         
         res.json({

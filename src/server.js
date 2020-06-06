@@ -15,8 +15,8 @@ app.listen(HTTP_PORT, () => {
 });
 // Root endpoint
 app.get("/", (req, res, next) => {
-  res.json({ "message": "Ok" })
-  console.log('ssss')
+  res.json({ "message": "Ok" });
+  
 });
 
 app.get("/api/datosTotal", (req, res, next) => {
@@ -28,9 +28,8 @@ app.get("/api/datosTotal", (req, res, next) => {
       res.status(400).json({ "error": err.message });
       return;
     }
-    console.log('entra a cargar datos Total: ', new Date());
-   // console.log(rows)
-    res.json({
+    
+   res.json({
       "message": "success",
       "data": rows
     })
@@ -40,7 +39,7 @@ app.get("/api/datosTotal", (req, res, next) => {
 
 
 app.get("/api/updateDatosIndice", (req, res, next) => {
-  // console.log('entro a update:', new Date());
+  
   db.all('DELETE FROM IndiceAmbiental', (err, rows) => {
     if (err) {
       console.log('Error al eliminar datos')
@@ -59,7 +58,7 @@ app.get("/api/updateDatosIndice", (req, res, next) => {
               res.status(400).json({ "error": err.message });
               return;
             }
-            console.log('entra a cargar datos Reload: ', new Date());
+            
             
             res.json({
               "message": "success",
@@ -73,7 +72,7 @@ app.get("/api/updateDatosIndice", (req, res, next) => {
 });
 
 app.get("/api/arrTemp", (req, res, next) => {
-  // console.log('entro a update:', new Date());
+  
   db.all('select cast(Replace(t.ENG,",",".") as Real) AS Temperatura FROM Temperatura t', (err, rows) => {
       if(err){
         console.log('error')
